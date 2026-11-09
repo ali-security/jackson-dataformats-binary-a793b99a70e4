@@ -28,9 +28,9 @@ public class MapSubtypeTest extends InteropTestBase {
         // with Apache deserializer implementation
 
         // Apache ignores any type information for maps
-        Assume.assumeTrue(deserializeFunctor != apacheDeserializer);
+        Assume.assumeTrue("Apache Avro deserializer ignores type information for maps; combination not applicable", deserializeFunctor != apacheDeserializer);
         // Apache doesn't encode type information for maps
-        Assume.assumeTrue(schemaFunctor != getApacheSchema);
+        Assume.assumeTrue("Apache Avro schema generator does not encode type information for maps; combination not applicable", schemaFunctor != getApacheSchema);
     }
 
     @Test
@@ -80,7 +80,7 @@ public class MapSubtypeTest extends InteropTestBase {
     @Test
     public void testEnumMap() throws IOException {
         // Apache schema generator can't handle EnumMaps
-        Assume.assumeTrue(schemaFunctor != getApacheSchema);
+        Assume.assumeTrue("Apache Avro schema generator cannot handle EnumMap; combination not applicable", schemaFunctor != getApacheSchema);
 
         EnumMap<DummyEnum, Integer> original = new EnumMap<>(DummyEnum.class);
         original.put(DummyEnum.NORTH, 1234);
